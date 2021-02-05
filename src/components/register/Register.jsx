@@ -1,9 +1,16 @@
 import React, {useState, useEffect, useRef} from 'react';
+import axios from "axios";
+import  {getCookie, setCookie} from '../../cookie_manager.js'
+
 import './Register.css';
 import Green from './img/green.png'
 import Red from './img/red.png'
 
-const Register = () => {
+const Register = props => {
+    if(getCookie('current_user') !== null){
+        props.history.replace('/')
+    }
+
     const didMountUsernameRef = useRef(false)
     const didMountEmailRef = useRef(false)
     const didMountPasswordRef = useRef(false)
@@ -25,6 +32,7 @@ const Register = () => {
 
     const [formError, setFormError]               = useState('');
 
+
     /***
      * Username
      */
@@ -33,16 +41,21 @@ const Register = () => {
             if(username ===''){
                 setUsernameError('Campo obligatorio')
                 setUsernameValid(Red)
-                return
-            }
-            if(!usernameValidator.test(username)){
+
+            }else if(!usernameValidator.test(username)){
                 setUsernameError('Solo letras y números')
                 setUsernameValid(Red)
-            }else if(false){
-
             }else{
-                setUsernameError('')
-                setUsernameValid(Green)
+                axios.get(`http://127.0.0.1:8000/auth/user/${username}`)
+                .then(response => {
+                    if(response.data.exists){
+                        setUsernameError('Nombre de Usuario no disponible')
+                        setUsernameValid(Red)
+                    }else {
+                        setUsernameError('')
+                        setUsernameValid(Green)
+                    }
+                });
             }
         }else {
             didMountUsernameRef.current = true;
@@ -55,14 +68,23 @@ const Register = () => {
      */
     useEffect(()=>{
         if(didMountEmailRef.current){
-            if(!emailValidator.test(email)){
+            if(email ===''){
+                setEmailError('Campo obligatorio')
+                setEmailValid(Red)
+            }else if(!emailValidator.test(email)){
                 setEmailError('Email no válido')
                 setEmailValid(Red)
-            }else if(false){
-
             } else {
-                setEmailError('');
-                setEmailValid(Green)
+                axios.get(`http://127.0.0.1:8000/auth/user/${email}`)
+                    .then(response => {
+                        if(response.data.exists){
+                            setEmailError('Email ya en uso')
+                            setEmailValid(Red)
+                        }else {
+                            setEmailError('')
+                            setEmailValid(Green)
+                        }
+                    });
             }
         }else {
             didMountEmailRef.current = true;
@@ -74,8 +96,17 @@ const Register = () => {
      */
     useEffect(()=>{
         if(didMountPasswordRef.current){
-            if(!passwordValidator.test(password)){
-                setPasswordError('Mínimo 6 caracteres')
+            if(password ===''){
+                setPasswordError('Campo obligatorio')
+                setPasswordValid(Red)
+            }else if(!passwordValidator.test(password)){
+                const remaining = 6-password.length
+                if(remaining !==1){
+                    setPasswordError(`Faltan ${remaining} caracteres`)
+                }else {
+                    setPasswordError(`Falta ${6-password.length} caracter`)
+                }
+
                 setPasswordValid(Red)
             }else {
                 setPasswordError('')
@@ -89,8 +120,19 @@ const Register = () => {
     const handleSubmit = event => {
         event.preventDefault();
         if(isValid()){
-            setFormError('')
-            console.log(username, email, password)
+            setFormError('');
+            axios.post('http://127.0.0.1:8000/auth/register',
+                {
+                    username: username,
+                    email: email,
+                    password: password
+                }
+            ).then(response => {
+                    setCookie('current_user', response.data.user, 1)
+                    props.history.push('/');
+            }, error => {
+                    console.log(error)
+            });
         }else{
             setFormError('Revisa antes de enviar!')
         }
@@ -106,31 +148,39 @@ const Register = () => {
 
     return(
         <div>
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="register-form" onSubmit={handleSubmit}>
                 <br/>
-                <div className="login-form-input">
+                <div className="register-form-input">
                     <label>Usuario</label>
+                    <div>
+                        <input type="text" value={username} onChange={event => setUsername(event.target.value)}/>
+                        <img src={usernameValid} alt="" width="25"/>
+                    </div>
                     <div className="form-error">{usernameError}</div>
-                    <input type="text" value={username} onChange={event => setUsername(event.target.value)}/>
-                    <img src={usernameValid} alt="" width="25"/>
                 </div>
 
-                <div className="login-form-input">
+                <div className="register-form-input">
                     <label>Email</label>
+                    <div>
+                        <input type="text" value={email} onChange={event => setEmail(event.target.value)}/>
+                        <img src={emailValid} alt="" width="25"/>
+                    </div>
                     <div className="form-error">{emailError}</div>
-                    <input type="text" value={email} onChange={event => setEmail(event.target.value)}/>
-                    <img src={emailValid} alt="" width="25"/>
                 </div>
 
 
-                <div className="login-form-input">
+                <div className="register-form-input">
                     <label>Contraseña</label>
+                    <div>
+                        <input type="password" value={password} onChange={event => setPassword(event.target.value)}/>
+                        <img src={passwordValid} alt="" width="25"/>
+                    </div>
                     <div className="form-error">{passwordError}</div>
-                    <input type="password" value={password} onChange={event => setPassword(event.target.value)}/>
-                    <img src={passwordValid} alt="" width="25"/>
                 </div>
                 <div className="form-error">{formError}</div>
                 <button type="submit">Registrarse</button>
+                <div>¿Ya tienes cuenta?</div>
+                <button type="submit" onClick={()=>props.history.push('/login')}>Iniciar sesión</button>
             </form>
         </div>
     )
