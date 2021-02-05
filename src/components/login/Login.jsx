@@ -13,25 +13,24 @@ const Login = props =>{
 
     const handleSubmit = event =>{
         event.preventDefault();
-        if(true){
-            setFormError('');
-            axios.post('http://127.0.0.1:8000/auth/login',
-                {
-                    username: email,
-                    email: email,
-                    password: password
-                }
-            ).then(response => {
-                if(response.data.message ==='Success'){
-                    setCookie('current_user', response.data.user, 1)
-                    props.history.push('/');
-                }else{
-                    setFormError('Usuario o contraseña incorrectos')
-                }
-            }, error => {
-                console.log(error)
-            });
-        }
+        setFormError('');
+
+        axios.post('http://api.jobot.es/auth/login',
+            {
+                username: email,
+                email: email,
+                password: password
+            }
+        ).then(response => {
+            if(response.data.message ==='Success'){
+                setCookie('current_user', response.data.user, 1)
+                props.history.push('/');
+            }else{
+                setFormError('Usuario o contraseña incorrectos')
+            }
+        }, error => {
+            console.log(error)
+        });
     }
 
     return(
