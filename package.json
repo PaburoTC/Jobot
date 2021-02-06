@@ -1,6 +1,5 @@
 {
   "name": "jobo",
-  "homepage": "https://jobot.es",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
