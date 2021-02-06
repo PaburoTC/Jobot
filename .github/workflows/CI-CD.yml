@@ -26,5 +26,3 @@ jobs:
             git status
             npm install
             npm run build
-            pm2 serve build/ 3000 --spa
-
