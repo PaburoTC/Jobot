@@ -37,6 +37,7 @@ const Register = props => {
      * Username
      */
     useEffect(()=>{
+        setUsernameValid('')
         if(didMountUsernameRef.current){
             if(username ===''){
                 setUsernameError('Campo obligatorio')
@@ -68,6 +69,7 @@ const Register = props => {
      */
     useEffect(()=>{
         if(didMountEmailRef.current){
+            setEmailValid('')
             if(email ===''){
                 setEmailError('Campo obligatorio')
                 setEmailValid(Red)
