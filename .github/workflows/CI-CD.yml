@@ -9,12 +9,22 @@ on:
   workflow_dispatch:
   
 jobs:
-  build:
-
+  CD:
+    name: Continuous Delivery
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
+      - name: SSH into production server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 207.180.207.114
+          username: root
+          key: ${{secrets.CONTABO_SSH_PK}}
+          port: 22
+          script: |
+            cd jobot
+            git pull origin master
+            git status
+            npm install
+            npm run build
+            pm2 serve build/ 3000 --spa
 
-    - name: Deploy react app to github pages
-      uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
