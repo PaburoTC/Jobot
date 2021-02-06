@@ -46,7 +46,7 @@ const Register = props => {
                 setUsernameError('Solo letras y números')
                 setUsernameValid(Red)
             }else{
-                axios.get(`http://127.0.0.1:8000/auth/user/${username}`)
+                axios.get(`https://api.jobot.es/auth/user/${username}`)
                 .then(response => {
                     if(response.data.exists){
                         setUsernameError('Nombre de Usuario no disponible')
@@ -75,7 +75,7 @@ const Register = props => {
                 setEmailError('Email no válido')
                 setEmailValid(Red)
             } else {
-                axios.get(`http://127.0.0.1:8000/auth/user/${email}`)
+                axios.get(`https://api.jobot.es/auth/user/${email}`)
                     .then(response => {
                         if(response.data.exists){
                             setEmailError('Email ya en uso')
@@ -121,7 +121,7 @@ const Register = props => {
         event.preventDefault();
         if(isValid()){
             setFormError('');
-            axios.post('http://127.0.0.1:8000/auth/register',
+            axios.post('https://api.jobot.es/auth/register',
                 {
                     username: username,
                     email: email,
