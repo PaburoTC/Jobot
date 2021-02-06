@@ -52,7 +52,7 @@ const Login = props =>{
                 <button type="submit">Login</button>
                 <div>¿No tienes cuenta?</div>
                 <button>Inicia sesión con Google</button>
-                <button type="submit" onClick={()=>props.history.push('/register')}>Registrarse</button>
+                <button type="submit" onClick={()=>props.history.push('/Register')}>Registrarse</button>
             </form>
         </div>
     )

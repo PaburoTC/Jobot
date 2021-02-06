@@ -4,12 +4,12 @@ import './Main.css'
 
 const Main = props =>{
     if(getCookie('current_user') === null){
-        props.history.replace('/login')
+        props.history.replace('/Login')
     }
     const logout = ()=>{
         console.log("POG")
         setCookie('current_user','',0)
-        props.history.push('/login')
+        props.history.push('/Login')
     }
     return(
         <div>

@@ -182,7 +182,7 @@ const Register = props => {
                 <div className="form-error">{formError}</div>
                 <button type="submit">Registrarse</button>
                 <div>¿Ya tienes cuenta?</div>
-                <button type="submit" onClick={()=>props.history.push('/login')}>Iniciar sesión</button>
+                <button type="submit" onClick={()=>props.history.push('/Login')}>Iniciar sesión</button>
             </form>
         </div>
     )
