@@ -13,13 +13,12 @@ jobs:
     name: Continuous Delivery
     runs-on: ubuntu-latest
     steps:
-      - name: SSH into production server
-        uses: appleboy/ssh-action@master
+      - uses: appleboy/ssh-action@master
         with:
-          host: 207.180.207.114
-          username: root
-          key: ${{secrets.CONTABO_SSH_PK}}
-          port: 22
+          host: ${{secrets.SERVER_IP}}
+          username: ${{secrets.SERVER_USER}}
+          key: ${{secrets.SERVER_SSH_PK}}
+          port: ${{secrets.SERVER_PORT}}
           script: |
             cd jobot
             git pull origin master
