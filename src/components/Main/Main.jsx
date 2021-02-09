@@ -10,9 +10,7 @@ const Main = props =>{
         props.history.replace('/Login')
     }
 
-
     const logout = ()=>{
-        console.log("POG")
         setCookie('current_user','',0)
         props.history.push('/Login')
     }

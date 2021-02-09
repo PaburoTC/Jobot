@@ -15,7 +15,7 @@ const Login = props =>{
         event.preventDefault();
         setFormError('');
 
-        axios.post('https://api.jobot.es/auth/login',
+        axios.post('/auth/login',
             {
                 username: email,
                 email: email,
