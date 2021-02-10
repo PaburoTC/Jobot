@@ -24,8 +24,10 @@ const EmailPreferences = props =>{
                     setEmailFriday(response.data.profile[4])
                     setEmailSaturday(response.data.profile[5])
                     setEmailSunday(response.data.profile[6])
+                    didMount.current = true;
                 }
             })
+
     }, [props.user])
 
     useEffect(()=>{
@@ -44,8 +46,6 @@ const EmailPreferences = props =>{
                 }, error => {
                     console.log(error)
                 })
-        }else{
-            didMount.current = true;
         }
     },[props.user, emailMonday,emailTuesday,emailWednesday,emailThursday,emailFriday,emailSaturday,emailSunday])
 
