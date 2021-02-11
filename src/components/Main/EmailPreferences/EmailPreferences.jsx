@@ -14,7 +14,7 @@ const EmailPreferences = props =>{
     const [emailSunday, setEmailSunday] = useState(false)
 
     useEffect(()=>{
-        axios.get(`/profile/${props.user}`)
+        axios.get(`https://api.jobot.es/profile/${props.user}`)
             .then(response => {
                 if(response.data.exists){
                     setEmailMonday(response.data.profile[0])
@@ -32,7 +32,7 @@ const EmailPreferences = props =>{
 
     useEffect(()=>{
         if(didMount.current){
-            axios.post(`/profile/${props.user}`,
+            axios.post(`https://api.jobot.es/profile/${props.user}`,
                 {
                     0:emailMonday,
                     1:emailTuesday,
