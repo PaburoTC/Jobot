@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import axios from "axios";
-import './EmailPreferences.css';
+import './EmailPreferences.scss';
 
 const EmailPreferences = props =>{
     const didMount = useRef(false)

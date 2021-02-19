@@ -1,0 +1,73 @@
+@import "src/colors.scss";
+
+.register-form{
+    background: $light1;
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    height: 624px;
+    margin: 5% auto 0 auto;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+
+
+    > button {
+        all: unset;
+        text-align: center;
+        margin: 20px auto 20px auto;
+        width: 80%;
+        height: 40px;
+
+        background-color:$light2;
+        color:black;
+        border: 10px ;
+        border-radius: 4px;
+        outline:none;
+        transition: .3s;
+    }
+
+    > button:hover{
+        background-color: black;
+        color: white;
+    }
+}
+
+.register-form-input{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 20px auto 0 auto;
+
+    label{ margin: 0 0 5px 0;}
+
+    input {
+        width: 320px;
+        margin: 10px 0 10px 0;
+        height: 40px;
+        border: 100px turquoise;
+        border-radius: 4px;
+        outline: none;
+        box-sizing: border-box;
+        transition: .3s;
+    }
+
+    input:focus{
+        border-color:$light2;
+        box-shadow: 0 0 8px 0 $light2;
+    }
+
+    > div {
+        width: 400px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.register-form-input-img {position: relative;}
+
+.register-form-input img {margin: 0 0 0 10px;}
+

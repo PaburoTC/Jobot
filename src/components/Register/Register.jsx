@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import axios from "axios";
 import  {getCookie, setCookie} from '../../cookie_manager.js'
 
-import './Register.css';
+import './Register.scss';
 import Green from './img/green.png'
 import Red from './img/red.png'
 

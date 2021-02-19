@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './Login.css'
+import './Login.scss'
 import axios from "axios";
 import {setCookie} from "../../cookie_manager";
 

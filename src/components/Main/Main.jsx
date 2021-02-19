@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import  {setCookie,getCookie} from '../../cookie_manager.js'
-import './Main.css'
+import './Main.scss'
 import EmailPreferences from "./EmailPreferences/EmailPreferences";
 
 const Main = props =>{
@@ -17,7 +17,10 @@ const Main = props =>{
 
     return(
         <div>
-            <button onClick={logout}>Cerrar sesión</button>
+            <header>
+                <button onClick={logout}>Cerrar sesión</button>
+            </header>
+
             <EmailPreferences user={currentUser}/>
         </div>
     )

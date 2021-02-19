@@ -1,0 +1,29 @@
+@import "src/colors.scss";
+
+header{
+    height: 100px;
+    background: $light1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+        height: 40px;
+        width: 100px;
+        margin: 10px;
+
+        background-color:$light2;
+        color:black;
+        border: 10px ;
+        border-radius: 4px;
+        outline:none;
+        transition: .3s;
+    }
+
+    button:hover {
+        background-color: black;
+        color: white;
+    }
+}

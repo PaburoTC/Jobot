@@ -1,0 +1,65 @@
+@import "src/colors.scss";
+
+.login-form{
+    background: $light1;
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    height: 524px;
+    margin: 5% auto 0 auto;
+    font-size: 20px;
+    text-align: center;
+
+    > button {
+        all: unset;
+        text-align: center;
+        margin: 20px auto 20px auto;
+        width: 80%;
+        height: 40px;
+
+        background-color:$light2;
+        color:black;
+        border: 10px ;
+        border-radius: 4px;
+        outline:none;
+        transition: .3s;
+    }
+
+    > button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    > button:last-of-type{
+        margin: 12px auto 20px auto;
+    }
+}
+
+.login-form-input{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 20px auto 0 auto;
+
+    > input{
+        margin: 5px 0 10px 0;
+        height: 40px;
+        border: 100px turquoise;
+        border-radius: 4px;
+        outline:none;
+        box-sizing: border-box;
+        transition: .3s;
+    }
+
+    input:focus{
+        border-color:$light2;
+        box-shadow: 0 0 8px 0 $light2;
+    }
+}
+
+.form-error {
+    height: 20px;
+    color: red;
+}
