@@ -140,13 +140,11 @@ const Register = props => {
         }
     }
 
-
     const isValid = ()=>{
         return usernameValid === Green &&
                emailValid    === Green &&
                passwordValid === Green;
     }
-
 
     return(
         <div>
@@ -160,7 +158,6 @@ const Register = props => {
                     </div>
                     <div className="form-error">{usernameError}</div>
                 </div>
-
                 <div className="register-form-input">
                     <label>Email</label>
                     <div>
@@ -169,8 +166,6 @@ const Register = props => {
                     </div>
                     <div className="form-error">{emailError}</div>
                 </div>
-
-
                 <div className="register-form-input">
                     <label>Contraseña</label>
                     <div>
