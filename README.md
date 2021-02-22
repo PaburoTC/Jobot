@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Jobot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+En Jobot, alojado en [jobot.es](https://jobot.es), podrás observar todos los eventos (teatros, conciertos, danza, etc) subvencionados por la Comunidad de
+Madrid disponibles en este instante. Además, podrás darte de alta en nuestra mailinglist customizable para ser el 
+primero en enterarte de los eventos que te interesan.
 
-## Available Scripts
+Esta aplicación ha sido desarrollada usando [React](https://es.reactjs.org/). A continuación encontrarás una breve
+documentación del código de la aplicación, divido en sus componentes. Todos los componentes de la aplicación son de tipo
+funcional en vez de clase para favorecer el rendimiento.
 
-In the project directory, you can run:
+## Register
 
-### `npm start`
+El componente [register](https://jobot.es/register) como su propio nombre indica, es el componente encargado de dar de
+alta a nuevos usuarios. Como toque extra, los campos del formulario se validan de forma dinámica a medida que el usuario
+los va a rellenar. Queremos evitar el proceso iterativo de rellenar el formulario, intentar enviarlo, solucionar los
+errores en los inputs y vuelta a empezar. Con la validación dinámica, solo pulsarás el botón de enviar una vez. 
+La validación no solo se limita a comprobar los caracteres del campo en cuestión, sino que llega tan lejos como informar
+al usuario en tiempo real si el nombre de usuario o correo escogido ya está dado de alta en Jobot.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Una vez completado el formulario, se almacena una cookie con el ID del usuario y la vista cambia al componente Main.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Login
 
-### `npm test`
+Login es responsable de verificar a usuarios ya existentes. Pese a compartir estética con Register, su comportamiento es mucho
+más sencillo que el de este. Login comprueba que la contraseña (o mejor dicho, su hash) coincide con el correspondiente
+al nombre de usuario o correo aportados. De ser idénticos, se guarda una cookie con el ID del usuario y la vista cambia 
+al componente Main.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La funcionalidad de iniciar sesión con Google aún no está implementada, pero ¡estamos trabajando en ello para implementarla
+lo antes posible!
 
-### `npm run build`
+## Main
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Main es la página principal de Jobot, donde podrás seleccionar los días de la semana en los que te interesan que ocurran 
+eventos, para que nosotros te avisemos de ellos. No solo eso, también verás un listado con todos los eventos disponibles
+para que no te pierdas nada de nada.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Event
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Event es el componente que modela la vista de un evento. Carece de lógica pues realmente es pura vista.
 
-### `npm run eject`
+## API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Para desarrollar Jobot he creado mi propia REST API en DJango, pero por motivos de seguridad (muchas claves quedan sueltas por el repo),
+el código fuente del mismo aún no es público, pero pronto lo será. Dando gran importancia a la privacidad y al manejo de 
+datos sensibles, los correos de los usuarios están cifrados bajo AES256 modo CBC y sus contraseñas están almacenadas tras
+aplicarlas SHA512. Los correos han de ser cifrados y no hasheados pues deben ser recuperados para recibir correos de la
+mailing list.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Quedo a vuestra disposición para solventar cualquier bug que hayaís encontrado o para escuchar vuestro feedback, el cuál
+es más que bienvenido. ¡Disfrutad de Jobot!
