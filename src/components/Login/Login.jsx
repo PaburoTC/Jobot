@@ -9,8 +9,6 @@ const Login = props =>{
     const [password, setPassword]   = useState('')
     const [formError, setFormError] = useState('')
 
-
-
     const handleSubmit = event =>{
         event.preventDefault();
         setFormError('');
