@@ -4,7 +4,7 @@ import './Event.scss'
 const Event = props =>{
     return(
         <div className="event">
-            <img src={props.img} alt={props.name}/>
+            <img src={props.img} alt=""/>
             <div className="event-body">
                 <h2>{props.name}</h2>
                 <div>{props.location}</div>
