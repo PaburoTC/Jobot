@@ -20,9 +20,8 @@ jobs:
           key: ${{secrets.SERVER_SSH_SK}}
           port: ${{secrets.SERVER_PORT}}
           script: |
-            cd jobot
+            cd Jobot
             git pull origin master
             git status
             npm install
-            npm run build
-            pm2 restart all
+            npm deploy-production
