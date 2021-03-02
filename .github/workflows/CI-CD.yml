@@ -24,4 +24,4 @@ jobs:
             git pull origin master
             git status
             npm install
-            npm deploy-production
+            npm run build
