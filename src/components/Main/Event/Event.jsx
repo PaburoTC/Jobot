@@ -8,7 +8,11 @@ const Event = props =>{
             <div className="event-body">
                 <h2>{props.name}</h2>
                 <div>{props.location}</div>
-                <div>{props.timestamp}</div>
+                <div>
+                    {props.endTimestamp === null ?
+                        props.startTimestamp :
+                        props.startTimestamp + " - " + props.endTimestamp}
+                </div>
                 <div className="event-available">{props.available ? "":"Agotado"}</div>
             </div>
         </div>

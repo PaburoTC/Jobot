@@ -117,7 +117,13 @@ const Main = props =>{
                     </div>
                 </div>
                 <div id="events">
-                    {events.map(event => <Event key={event.id} name={event.name} location={event.location} img={event.img} timestamp={event.timestamp} available={event.available}/>)}
+                    {events.map(event => <Event key={event.id}
+                                                name={event.name}
+                                                location={event.location}
+                                                img={event.img}
+                                                startTimestamp={event.startTimestamp}
+                                                endTimestamp={event.endTimestamp}
+                                                available={event.available}/>)}
                 </div>
             </div>
         </div>
