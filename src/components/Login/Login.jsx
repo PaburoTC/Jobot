@@ -23,8 +23,9 @@ const Login = props =>{
                 password: password
             },
             {
-                headers: {'X-CSRFToken': getCookie('csrftoken')},
-                withCredentials: true}
+                withCredentials: true,
+                headers: {'X-CSRFToken': getCookie('csrftoken')}
+            }
         ).then(response => {
             if(response.data.message ==='Success'){
                 setCookie('current_user', response.data.user, 1)
