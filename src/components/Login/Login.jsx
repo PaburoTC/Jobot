@@ -23,7 +23,6 @@ const Login = props =>{
                 password: password
             },
             {
-                withCredentials: true,
                 headers: {'X-CSRFToken': getCookie('csrftoken'), 'xD':'xD', lol:'lol'}
             }
         ).then(response => {
