@@ -5,6 +5,7 @@ import {setCookie, getCookie} from "../../cookie_manager";
 import {GoogleLogin} from 'react-google-login';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.withCredentials = true;
 
 
