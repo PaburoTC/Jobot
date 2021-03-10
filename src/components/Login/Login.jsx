@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './Login.scss'
 import axios from "axios";
-import {setCookie} from "../../cookie_manager";
+import {setCookie, getCookie} from "../../cookie_manager";
 import {GoogleLogin} from 'react-google-login';
 
 const Login = props =>{
@@ -21,7 +21,8 @@ const Login = props =>{
                 username: email,
                 email: email,
                 password: password
-            }
+            },
+            {headers: {'X-CSRFToken': getCookie('csrftoken')}}
         ).then(response => {
             if(response.data.message ==='Success'){
                 setCookie('current_user', response.data.user, 1)
