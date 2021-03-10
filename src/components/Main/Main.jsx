@@ -35,11 +35,11 @@ const Main = props =>{
     }
 
     useEffect(()=>{
-        axios.get('https://api.jobot.es/events')
+        axios.get('https://jobot.es/api/events')
         .then(response => {
               setEvents(response.data)
         })
-        axios.get(`https://api.jobot.es/auth/user/${userUUID}`)
+        axios.get(`https://jobot.es/api/auth/user/${userUUID}`)
             .then(response => {
                 setCurrentUser(response.data.user)
                 didMount.current = true;
@@ -48,7 +48,7 @@ const Main = props =>{
 
     useEffect(()=>{
         if(didMount.current){
-            axios.post(`https://api.jobot.es/profile/${userUUID}`, currentUser.profile)
+            axios.post(`https://jobot.es/api/profile/${userUUID}`, currentUser.profile)
                 .then(() => {
 
                 }, error => {

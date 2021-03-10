@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './Login.scss'
 import axios from "axios";
 import {setCookie} from "../../cookie_manager";
+import {GoogleLogin} from 'react-google-login';
 
 const Login = props =>{
 
@@ -9,11 +10,13 @@ const Login = props =>{
     const [password, setPassword]   = useState('')
     const [formError, setFormError] = useState('')
 
+    const clientID = '780234949397-80ds1tk4arnth6ch6is95e98lqgps8k1.apps.googleusercontent.com'
+
     const handleSubmit = event =>{
         event.preventDefault();
         setFormError('');
 
-        axios.post('https://api.jobot.es/auth/login',
+        axios.post('https://jobot.es/api/auth/login',
             {
                 username: email,
                 email: email,
@@ -49,7 +52,14 @@ const Login = props =>{
                 <div className="form-error">{formError}</div>
                 <button type="submit">Login</button>
                 <div>¿No tienes cuenta?</div>
-                <button>Inicia sesión con Google</button>
+                <GoogleLogin
+                    clientId={clientID}
+                    buttonText="Inicia sesión con Google"
+                    onSuccess={response => console.log('SUCCESS: ',response)}
+                    onFailure={response => console.log('FAILURE: ', response.profileObj)}
+                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
+                />
                 <button type="submit" onClick={()=>props.history.push('/Register')}>Registrarse</button>
             </form>
         </div>
