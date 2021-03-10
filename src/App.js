@@ -8,8 +8,10 @@ import Login from "./components/Login/Login";
 
 function App() {
     const setCsrf = async () => {
-        await axios.get('https://jobot.es/api/auth/set-csrf-cookie/');
+        await axios.get('https://jobot.es/api/auth/set-csrf-cookie');
     }
+
+    setCsrf()
 
     return (
         <BrowserRouter>
