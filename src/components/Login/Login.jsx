@@ -4,6 +4,10 @@ import axios from "axios";
 import {setCookie, getCookie} from "../../cookie_manager";
 import {GoogleLogin} from 'react-google-login';
 
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+
 const Login = props =>{
 
     const [email, setEmail]         = useState('')
@@ -23,7 +27,7 @@ const Login = props =>{
                 password: password
             },
             {
-                withCredentials: true
+                headers:{'X-CSRFToken': getCookie('csrftoken')}
             }
         ).then(response => {
             if(response.data.message ==='Success'){
