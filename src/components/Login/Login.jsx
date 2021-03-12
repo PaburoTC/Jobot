@@ -6,7 +6,7 @@ import {GoogleLogin} from 'react-google-login';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 
 const Login = props =>{
@@ -15,7 +15,7 @@ const Login = props =>{
     const [password, setPassword]   = useState('')
     const [formError, setFormError] = useState('')
 
-    const clientID = '780234949397-80ds1tk4arnth6ch6is95e98lqgps8k1.apps.googleusercontent.com'
+    const clientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
     const handleSubmit = event =>{
         event.preventDefault();
@@ -28,18 +28,34 @@ const Login = props =>{
                 password: password
             },
             {
-                headers:{'X-CSRFToken': getCookie('csrftoken')}
+                headers:{'X-CSRFToken': getCookie('csrftoken')},
+                withCredentials: true
             }
         ).then(response => {
-            if(response.data.message ==='Success'){
+            if(response.data.success){
                 setCookie('current_user', response.data.user, 1)
                 props.history.push('/');
             }else{
-                setFormError('Usuario o contraseña incorrectos')
+                setFormError(response.data.message)
             }
         }, error => {
             console.log(error)
         });
+    }
+
+    const googleLogin = response =>{
+        console.log('ENVIANDO AL BACKEND')
+        console.log(response)
+        axios.post('http://127.0.0.1:8000/api/auth/googleLogin',
+            {
+                token: response.tokenId
+            }).then(response =>{
+                console.log(response)
+                if (response.data.success){
+                    setCookie('current_user', response.data.user, 1)
+                    props.history.push('/');
+                }
+            })
     }
 
     return(
@@ -50,7 +66,6 @@ const Login = props =>{
                     <label>Email o Usuario</label>
                     <input type="text" value={email} onChange={event => setEmail(event.target.value)}/>
                 </div>
-
 
                 <div className="login-form-input">
                     <label>Contraseña</label>
@@ -63,7 +78,7 @@ const Login = props =>{
                 <GoogleLogin
                     clientId={clientID}
                     buttonText="Inicia sesión con Google"
-                    onSuccess={response => console.log('SUCCESS: ',response)}
+                    onSuccess={response => googleLogin(response)}
                     onFailure={response => console.log('FAILURE: ', response.profileObj)}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}

@@ -130,8 +130,10 @@ const Register = props => {
                     password: password
                 }
             ).then(response => {
+                if(response.data.success){
                     setCookie('current_user', response.data.user, 1)
                     props.history.push('/');
+                }
             }, error => {
                     console.log(error)
             });
