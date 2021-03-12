@@ -79,7 +79,6 @@ const Login = props =>{
                     onSuccess={response => googleLogin(response)}
                     onFailure={response => console.log('FAILURE: ', response.profileObj)}
                     cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
                 />
                 <button type="submit" onClick={()=>props.history.push('/Register')}>Registrarse</button>
             </form>

@@ -1,0 +1,5 @@
+.idea
+.gitignore
+.eslintcache
+.env
+node_modules
