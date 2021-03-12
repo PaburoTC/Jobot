@@ -44,9 +44,7 @@ const Login = props =>{
     }
 
     const googleLogin = response =>{
-        console.log('ENVIANDO AL BACKEND')
-        console.log(response)
-        axios.post('http://127.0.0.1:8000/api/auth/googleLogin',
+        axios.post('https://jobot.es/api/auth/googleLogin',
             {
                 token: response.tokenId
             }).then(response =>{
