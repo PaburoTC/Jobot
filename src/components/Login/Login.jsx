@@ -43,7 +43,7 @@ const Login = props =>{
         });
     }
 
-    const googleLogin = async response =>{
+    const googleLogin = response =>{
         axios.post('https://jobot.es/api/auth/googleLogin',
             {
                 token: response.tokenId
