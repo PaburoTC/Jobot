@@ -128,6 +128,10 @@ const Register = props => {
                     username: username,
                     email: email,
                     password: password
+                },
+                {
+                    headers:{'X-CSRFToken': getCookie('csrftoken')},
+                    withCredentials: true
                 }
             ).then(response => {
                 if(response.data.success){
@@ -149,7 +153,7 @@ const Register = props => {
     }
 
     return(
-        <div>
+        <React.Fragment>
             <form className="register-form" onSubmit={handleSubmit}>
                 <br/>
                 <div className="register-form-input">
@@ -181,7 +185,7 @@ const Register = props => {
                 <div>¿Ya tienes cuenta?</div>
                 <button type="submit" onClick={()=>props.history.push('/Login')}>Iniciar sesión</button>
             </form>
-        </div>
+        </React.Fragment>
     )
 }
 

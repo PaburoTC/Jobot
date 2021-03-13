@@ -47,6 +47,10 @@ const Login = props =>{
         axios.post('https://jobot.es/api/auth/googleLogin',
             {
                 token: response.tokenId
+            },
+            {
+                headers:{'X-CSRFToken': getCookie('csrftoken')},
+                withCredentials: true
             }).then(response =>{
                 console.log(response)
                 if (response.data.success){
@@ -57,7 +61,7 @@ const Login = props =>{
     }
 
     return(
-        <div>
+        <React.Fragment>
             <form className="login-form" onSubmit={handleSubmit}>
                 <br/>
                 <div className="login-form-input">
@@ -82,7 +86,7 @@ const Login = props =>{
                 />
                 <button type="submit" onClick={()=>props.history.push('/Register')}>Registrarse</button>
             </form>
-        </div>
+        </React.Fragment>
     )
 }
 
