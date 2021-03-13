@@ -48,7 +48,12 @@ const Main = props =>{
 
     useEffect(()=>{
         if(didMount.current){
-            axios.post(`https://jobot.es/api/profile/${userUUID}`, currentUser.profile)
+            axios.post(`https://jobot.es/api/profile/${userUUID}`,
+                currentUser.profile,
+                {
+                    headers:{'X-CSRFToken': getCookie('csrftoken')},
+                    withCredentials: true
+                })
                 .then(() => {
 
                 }, error => {
@@ -58,7 +63,7 @@ const Main = props =>{
     },[currentUser, userUUID])
 
     return(
-        <div>
+        <React.Fragment>
             <header>
                 {currentUser.username}
                 <button onClick={logout}>Cerrar sesión</button>
@@ -126,7 +131,7 @@ const Main = props =>{
                                                 available={event.available}/>)}
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     )
 }
 
